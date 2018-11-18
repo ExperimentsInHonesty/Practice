@@ -1,0 +1,79 @@
+/*
+****************************************************************************************
+This is an experiment to see if its possible to write a test suite in plain Javascript.
+****************************************************************************************
+
+Create a function that turns a string into staduium wave. You will be passed a string and you must
+return that string in an array where an uppercase letter is a person standing up.
+Rules
+1.  The input string can be upperCase or lower case, or any combination of the two, and it may also be empty.
+2.  If the character in the string is whitespace then pass over it as if it was an empty seat.
+
+*/
+
+const wave =(str) => {
+ 	let outcome = [];
+  if (str.length === 0) {return outcome;}
+  let array = str.slice(0).toLowerCase().split("");
+
+  array.forEach((el, i) => {
+    if (el !== " ") {
+  	  let temp = array.slice(0);
+    	temp[i] =temp[i].toUpperCase();
+    	outcome.push(temp.join("")); 
+    };
+  });
+  
+  return outcome;
+}
+
+//****************************************************************************************
+// test suite similar to Mocha chai but with just javascript
+//****************************************************************************************
+
+const test = (actual, expected, func) => {
+  console.log(func(actual).join(",") === expected.join(",")? "test passed:": "test failed:", actual)
+}
+
+const test1 = () => {
+  let string = "hello"
+  let result = ["Hello", "hEllo", "heLlo", "helLo", "hellO"];
+  return test(string, result, wave)
+}
+
+const test2 = () => {
+  let string = "";
+  let result = [];
+  return test(string, result, wave)
+}
+
+const test3 = () => {
+  let string = "two words"
+  let result = ["Two words", "tWo words", "twO words", "two Words", "two wOrds", "two woRds", "two worDs", "two wordS"];
+  return test(string, result, wave)
+}
+
+const test4 = () => {
+	let string = " gap "
+	let result = [" Gap ", " gAp ", " gaP "];
+  return test(string, result, wave)
+}
+
+const test5 = () => {
+  let string = "HELLO"
+  let result = ["Hello", "hEllo", "heLlo", "helLo", "hellO"];
+  return test(string, result, wave)
+}
+
+const test6 = () => {
+  let string = "HeLLO"
+  let result = ["Hello", "hEllo", "heLlo", "helLo", "hellO"];
+  return test(string, result, wave)
+}
+
+test1()
+test2()
+test3()
+test4()
+test5()
+test6()
