@@ -1,2 +1,2 @@
 # Practice
-JavaScript
+Daily JavaScript practice
